@@ -1,5 +1,3 @@
-require 'oas_parser'
-
 module Committee::Rails
   module Test
     module Methods
@@ -7,7 +5,7 @@ module Committee::Rails
 
       def committee_options
         @committee_options ||= {
-            open_api_3: Committee::Drivers::OpenAPI3.new.parse(OasParser::Definition.resolve(Rails.root.join('open_api_3', 'schema.yml')))
+            open_api_3: Committee::Drivers::OpenAPI3.new.parse(OpenAPIParser.parse(YAML.load_file(Rails.root.join('open_api_3', 'schema.yml').to_s)))
           }
       end
 
